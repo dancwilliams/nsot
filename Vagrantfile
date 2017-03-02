@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.11"
+  #config.vm.network "private_network", ip: "192.168.33.11"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -66,6 +66,9 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+  config.proxy.http     = "http://cis-alpha-pitc-ssow.proxy.corporate.ge.com:80"
+  config.proxy.https     = "http://cis-alpha-pitc-ssow.proxy.corporate.ge.com:80"
+
   config.vm.provision "shell", inline: <<-SHELL
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -y update
