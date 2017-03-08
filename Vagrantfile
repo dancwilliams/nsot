@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.11"
+  #config.vm.network "private_network", ip: "192.168.33.11"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -73,7 +73,7 @@ Vagrant.configure(2) do |config|
 export DEBIAN_FRONTEND=noninteractive
 sudo bash -c "echo nameserver 10.220.220.220 > /etc/resolv.conf"
 sudo apt-get -y update
-sudo apt-get -y install build-essential python-dev libffi-dev libssl-dev
+sudo apt-get -y install build-essential python-dev libffi-dev libssl-dev python-setuptools
 sudo easy_install pip
 sudo pip install requests[security]
 sudo pip install --upgrade setuptools
