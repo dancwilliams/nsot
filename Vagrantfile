@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  #config.vm.network "private_network", ip: "192.168.33.11"
+  config.vm.network "private_network", ip: "192.168.33.11"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -71,10 +71,10 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
 export DEBIAN_FRONTEND=noninteractive
+sudo bash -c "echo nameserver 10.220.220.220 > /etc/resolv.conf"
 sudo apt-get -y update
 sudo apt-get -y install build-essential python-dev libffi-dev libssl-dev
-sudo apt-get -y install python-pip
-sudo pip install --upgrade pip
+sudo easy_install pip
 sudo pip install requests[security]
 sudo pip install --upgrade setuptools
 sudo pip install nsot mrproxy
@@ -82,7 +82,7 @@ mkdir /home/vagrant/.nsot
 nsot-server init /home/vagrant/.nsot/nsot.conf.py
 chown -R vagrant:vagrant /home/vagrant/.nsot
 sed -i "s/localhost/0.0.0.0/" /home/vagrant/.nsot/nsot.conf.py
-nsot-server --config=/home/vagrant/.nsot/nsot.conf.py collectstatic --noinput
+sudo nsot-server --config=/home/vagrant/.nsot/nsot.conf.py collectstatic --noinput
    SHELL
 
 end
